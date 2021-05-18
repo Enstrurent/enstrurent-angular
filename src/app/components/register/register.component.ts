@@ -10,41 +10,41 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  registerForm!:FormGroup;
 
-  registerForm!:FormGroup
-
-  constructor(
-    private router:Router,
+  constructor(private formBuilder:FormBuilder,
+    private toastrService:ToastrService,
     private authService:AuthService,
-    private toastrService:ToastrService, 
-    private formBuilder:FormBuilder
-  ) { }
+    private router:Router) { }
 
   ngOnInit(): void {
     this.createRegisterForm()
   }
 
   createRegisterForm(){
-    this.registerForm = this.formBuilder.group({
-      email:["", Validators.required],
-      name:["", Validators.required],
-      surname:["", Validators.required],
-      password:["", Validators.required],
-      phoneNumber:["", Validators.required],
-      clientAddress:["", Validators.required]
+    this.registerForm=this.formBuilder.group({
+      firstName:["",Validators.required],
+      lastName:["",Validators.required],
+      email:["",Validators.required],
+      password:["",Validators.required],
     })
   }
-
   register(){
     if(this.registerForm.valid){
-      console.log(this.registerForm.value)
+      console.log(this.registerForm.value);
 
-      let registerModel = Object.assign({}, this.registerForm.value)
+      let registerModel=Object.assign({},this.registerForm.value)
       this.authService.login(registerModel).subscribe(response=>{
         localStorage.setItem("token", response.data.token)
-        this.toastrService.success("Giriş başarılı")
+         this.toastrService.success("Giriş Başarılı")
+        // this.toastrService.info("anasayfaya yönlendiriliyorsunuz..")
+         
+        //  this.router.navigate(["cars"])
+        
       },responseError=>{
-        this.toastrService.error(responseError.error)
+        console.log(responseError)
+        this.toastrService.error(responseError.error);
+        
       })
     }
   }

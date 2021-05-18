@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/loginModel';
@@ -15,25 +14,18 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class AuthService {
 
-  user= "seda";
+  
   baseURL = environment.baseURL + 'auth/';
 
   constructor(
     private httpClient:HttpClient,
     private router:Router,
-    private localStorageService:LocalStorageService,
-    private jwtHelper:JwtHelperService
+    private localStorageService:LocalStorageService
     ) { }
 
 
-    login(loginModel:LoginModel) : Observable<SingleResponseModel<TokenModel>>{
-      let newPath = this.baseURL + 'login';
-      return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath, this.user);
-    }
-
-    register(registerModel:RegisterModel) : Observable<SingleResponseModel<TokenModel>>{
-      let newPath = this.baseURL + 'register';
-      return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath, registerModel)
+    login(loginModel:LoginModel){
+      return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"login",loginModel)
     }
   
     isAuthenticated(){
@@ -45,8 +37,12 @@ export class AuthService {
       }
     }
 
-    logout() {
-      localStorage.clear();
-      //not done this method
-    }
+    // async onRefresh() {
+    //   this.router.routeReuseStrategy.shouldReuseRoute = function () { return false }
+    //   const currentUrl = this.router.url + '?'
+    //   return this.router.navigateByUrl(currentUrl).then(() => {
+    //     this.router.navigated = false
+    //     this.router.navigate([this.router.url])
+    //   })
+    // }
 }
