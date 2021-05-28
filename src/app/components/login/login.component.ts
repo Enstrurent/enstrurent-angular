@@ -3,12 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   loginForm! : FormGroup;
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
         this.toastrService.error(responseError.error)
       })
     }
+
   }
 
 }
