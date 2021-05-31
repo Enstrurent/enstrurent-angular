@@ -15,17 +15,21 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class AuthService {
+  name: string = "";
+  surname:string="";
   role:any;
   roles: any[] = [];
   token: any;
   isLoggedIn: boolean = false;
+  email:string;
+
   baseURL = environment.baseURL + 'auth/';
 
   constructor(
     private httpClient:HttpClient,
     private router:Router,
     private localStorageService:LocalStorageService,
-    private jwtHelperService:JwtHelperService
+    private jwtHelper: JwtHelperService
     ) { }
 
 
@@ -33,8 +37,8 @@ export class AuthService {
       return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"login",loginModel)
     }
   
-    sing_up(clientRegisterModel:ClientRegisterModel){
-      return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"sing_up",clientRegisterModel)
+    sign_up(clientRegisterModel:ClientRegisterModel){
+      return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"sign_up",clientRegisterModel)
     }
 
     isAuthenticated(){
@@ -46,12 +50,47 @@ export class AuthService {
       }
     }
 
-    // async onRefresh() {
-    //   this.router.routeReuseStrategy.shouldReuseRoute = function () { return false }
-    //   const currentUrl = this.router.url + '?'
-    //   return this.router.navigateByUrl(currentUrl).then(() => {
-    //     this.router.navigated = false
-    //     this.router.navigate([this.router.url])
-    //   })
-    // }
+    clientRegisterDetailFromToken(){
+      this.token = this.localStorageService.getItem("token");
+      let decodedToken = this.jwtHelper.decodeToken(this.token);
+      let name = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+      this.name = name.split(' ')[0];
+      let surname = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+      this.surname = surname.split(' ')[1];
+      this.roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      this.role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      
+      this.email=decodedToken["email"];
+    }
+  
+    roleCheck(roleList: string[]) {
+      if (this.roles !== null) {
+        roleList.forEach(role => {
+          if (this.roles.includes(role)) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    logout(){
+      localStorage.clear();
+      this.onRefresh();
+      this.router.navigateByUrl('/');
+      
+    }
+  
+    async onRefresh() {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () { return false }
+      const currentUrl = this.router.url + '?'
+      return this.router.navigateByUrl(currentUrl).then(() => {
+        this.router.navigated = false
+        this.router.navigate([this.router.url])
+      })
+    }
 }

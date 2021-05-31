@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
-import { RegisterComponent } from '../register/register.component';
+import { ClientRegisterComponent } from '../clientRegister/clientRegister.component';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ import { RegisterComponent } from '../register/register.component';
 
 export class LoginComponent implements OnInit {
 
-  loginForm! : FormGroup;
+  loginForm : FormGroup;
   constructor(
     private formBuilder:FormBuilder,
     private authService:AuthService,
@@ -41,12 +41,13 @@ export class LoginComponent implements OnInit {
         this.toastrService.info(response.message)
         this.toastrService.success("Giriş başarılı")
         localStorage.setItem("token",response.data.token)
+        this.authService.onRefresh()
       },responseError=>{
         //console.log(responseError)
         this.toastrService.error(responseError.error)
       })
     }
-
   }
 
+  
 }
