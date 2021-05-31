@@ -2,15 +2,19 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { ClientRegisterComponent } from './components/clientRegister/clientRegister.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NavComponent } from './components/nav/nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AddressComponent } from './components/address/address.component';
+import { RenterRegisterComponent } from './components/renter-register/renter-register.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 export function tokenGetter() {
@@ -20,8 +24,10 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
-    NavComponent
+    ClientRegisterComponent,
+    NavComponent,
+    AddressComponent,
+    RenterRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,11 +36,22 @@ export function tokenGetter() {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: tokenGetter,
+    }
+  }),
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
