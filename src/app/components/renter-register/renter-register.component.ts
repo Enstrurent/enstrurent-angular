@@ -5,64 +5,62 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-clientRegister',
-  templateUrl: './clientRegister.component.html',
-  styleUrls: ['./clientRegister.component.css']
+  selector: 'app-renter-register',
+  templateUrl: './renter-register.component.html',
+  styleUrls: ['./renter-register.component.css']
 })
-export class ClientRegisterComponent implements OnInit {
-  clientRegisterForm:FormGroup
+export class RenterRegisterComponent implements OnInit {
 
-  
-  constructor(private formBuilder:FormBuilder,
+  renterRegisterForm:FormGroup
+
+  constructor(
+    private formBuilder:FormBuilder,
+    private router:Router,
     private toastrService:ToastrService,
-    private authService:AuthService,
-    private router:Router) { }
+    private authService:AuthService
+  ) { }
 
   ngOnInit(): void {
-    this.createClientRegisterForm()
+    this.createRenterRegisterForm()
   }
 
-  createClientRegisterForm(){
-    this.clientRegisterForm=this.formBuilder.group({
+  createRenterRegisterForm(){
+    this.renterRegisterForm=this.formBuilder.group({
       name:["",Validators.required],
       surname:["",Validators.required],
       email:["",Validators.required],
       password:["",Validators.required],
       phoneNumber:["",Validators.required],
+      storeInfo:["",Validators.required],
+      storeName:["",Validators.required],
       title:["", Validators.required],
       city:["",Validators.required],
       state:["",Validators.required],
       zipcode:["",Validators.required],
       street:["",Validators.required],
       buildingNo:["",Validators.required],
+      addressLine:["",Validators.required],
       description:["",Validators.required],
-      
     })
   }
   sign_up(){
-    if(this.clientRegisterForm.valid){
-      console.log(this.clientRegisterForm.value);
+    if(this.renterRegisterForm.valid){
+      console.log(this.renterRegisterForm.value);
 
-      let clientRegisterModel=Object.assign({},this.clientRegisterForm.value)
-      this.authService.sign_up(clientRegisterModel).subscribe(response=>{
+      let registerModel=Object.assign({},this.renterRegisterForm.value)
+      this.authService.sign_up(registerModel).subscribe(response=>{
         this.toastrService.info(response.message)
-        this.toastrService.success("Kayıt Başarılı")
+        this.toastrService.success("Giriş Başarılı")
         localStorage.setItem("token", response.data.token)
-         
+         this.toastrService.success("Giriş Başarılı")
         // this.toastrService.info("anasayfaya yönlendiriliyorsunuz..")
-
+         
+        
       },responseError=>{
         //console.log(responseError)
-        this.toastrService.error(responseError.error)
-
+        this.toastrService.error(responseError.error);
+        
       })
     }
   }
-
-  // onSubmit(): void {
-  //   const form = this.clientRegisterForm.value;
-  //   console.log(" Kayıt Başarılı: ", this.clientRegisterForm);
-  // }
-
 }
-

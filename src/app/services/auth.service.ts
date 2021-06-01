@@ -5,8 +5,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ClientRegisterModel } from '../models/clientRegisterModel';
+import { ListResponseModel } from '../models/listResponseModel';
 import { LoginModel } from '../models/loginModel';
 import { RegisterModel } from '../models/registerModel';
+import { RenterRegisterModel } from '../models/renterRegisterModel';
+import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
 import { LocalStorageService } from './local-storage.service';
@@ -32,13 +35,12 @@ export class AuthService {
     private jwtHelper: JwtHelperService
     ) { }
 
-
     login(loginModel:LoginModel){
       return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"login",loginModel)
     }
   
-    sign_up(clientRegisterModel:ClientRegisterModel){
-      return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"sign_up",clientRegisterModel)
+    sign_up(data: any){
+      return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"sign_up", data)
     }
 
     isAuthenticated(){
@@ -51,6 +53,10 @@ export class AuthService {
     }
 
     clientRegisterDetailFromToken(){
+      this.token = this.localStorageService.getItem("token");
+    }
+
+    renterRegisterDetailFromToken(){
       this.token = this.localStorageService.getItem("token");
       let decodedToken = this.jwtHelper.decodeToken(this.token);
       let name = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
