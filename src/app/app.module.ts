@@ -15,6 +15,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddressComponent } from './components/address/address.component';
 import { RenterRegisterComponent } from './components/renter-register/renter-register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RenterComponent } from './components/renter/renter.component';
+import { ClientComponent } from './components/client/client.component';
 
 
 export function tokenGetter() {
@@ -27,7 +29,9 @@ export function tokenGetter() {
     ClientRegisterComponent,
     NavComponent,
     AddressComponent,
-    RenterRegisterComponent
+    RenterRegisterComponent,
+    RenterComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

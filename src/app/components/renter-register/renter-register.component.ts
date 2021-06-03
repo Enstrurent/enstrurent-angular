@@ -43,6 +43,7 @@ export class RenterRegisterComponent implements OnInit {
       description:["",Validators.required],
     })
   }
+  
   sign_up(){
     if(this.renterRegisterForm.valid){
       console.log(this.renterRegisterForm.value);
