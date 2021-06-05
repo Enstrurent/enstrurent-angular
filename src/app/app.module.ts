@@ -17,6 +17,9 @@ import { RenterRegisterComponent } from './components/renter-register/renter-reg
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RenterComponent } from './components/renter/renter.component';
 import { ClientComponent } from './components/client/client.component';
+import { RenterAccountComponent } from './components/renter-account/renter-account.component';
+import { ClientAccountComponent } from './components/client-account/client-account.component';
+import { ProductComponent } from './components/product/product.component';
 
 
 export function tokenGetter() {
@@ -31,7 +34,10 @@ export function tokenGetter() {
     AddressComponent,
     RenterRegisterComponent,
     RenterComponent,
-    ClientComponent
+    ClientComponent,
+    RenterAccountComponent,
+    ClientAccountComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
