@@ -1,0 +1,20 @@
+export interface Product{
+    renterId:number
+    city:string
+    category:string
+    brand:string
+    model:string
+    info:string
+    isRental:boolean
+    isDepositRequired:boolean
+    isOpenToSell:boolean
+    isUsed:boolean
+    maxRentalDays:number
+    dailyPrice:number
+    fullPrice:number
+    depositPrice:number
+    stockQuantity:number
+    deliveryTypes:string
+    imageNames:string
+    tags:string
+}
