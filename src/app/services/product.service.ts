@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -16,24 +16,33 @@ export class ProductService {
   baseURL = environment.baseURL
   constructor(private httpClient:HttpClient) { }
 
-  getProduct(product:Product):Observable<SingleResponseModel<Product>>{
-    let newPath = this.baseURL + 'product'
-    return this.httpClient.get<SingleResponseModel<Product>>(newPath)
-  }
-
-  getProducts():Observable<ListResponseModel<Product>>{
-    let newPath = this.baseURL + 'products'
+  getProduct(id:number):Observable<ListResponseModel<Product>>{
+    let newPath = this.baseURL + 'products/' + id
     return this.httpClient.get<ListResponseModel<Product>>(newPath)
   }
 
-  addProduct(product:Product):Observable<ResponseModel>{
+  getAllProducts():Observable<ListResponseModel<Product>>{
+    let newPath = this.baseURL + 'products/'
+    return this.httpClient.get<ListResponseModel<Product>>(newPath)
+  }
+
+  getRenterProducts(renterId:number):Observable<ListResponseModel<Product>>{
+    let newPath = this.baseURL + 'products/by_renter'
+    return this.httpClient.get<ListResponseModel<Product>>(newPath)
+  }
+
+  add(product:Product):Observable<ResponseModel>{
     let newPath = this.baseURL + 'products'
     return this.httpClient.post<ResponseModel>(newPath,product)
   }
 
-  updateProduct(product:Product):Observable<ResponseModel>{
+  update(product:Product):Observable<ResponseModel>{
     let newPath = this.baseURL + 'products'
-    return this.httpClient.post<ResponseModel>(newPath,product)
+    return this.httpClient.put<ResponseModel>(newPath,product)
   }
 
+  delete(product:Product):Observable<ResponseModel>{
+    let newPath = this.baseURL + 'products/'
+    return this.httpClient.delete<ResponseModel>(newPath)
+  }
 }

@@ -44,16 +44,16 @@ export class RenterRegisterComponent implements OnInit {
     })
   }
   
-  sign_up(){
+  register(){
     if(this.renterRegisterForm.valid){
       console.log(this.renterRegisterForm.value);
 
       let registerModel=Object.assign({},this.renterRegisterForm.value)
-      this.authService.sign_up(registerModel).subscribe(response=>{
+      this.authService.register(registerModel).subscribe(response=>{
         this.toastrService.info(response.message)
-        this.toastrService.success("Giriş Başarılı")
+        this.toastrService.success("Kayıt Başarılı")
         localStorage.setItem("token", response.data.token)
-         this.toastrService.success("Giriş Başarılı")
+         //this.toastrService.success("Giriş Başarılı")
         // this.toastrService.info("anasayfaya yönlendiriliyorsunuz..")
          
         

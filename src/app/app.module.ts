@@ -19,7 +19,13 @@ import { RenterComponent } from './components/renter/renter.component';
 import { ClientComponent } from './components/client/client.component';
 import { RenterAccountComponent } from './components/renter-account/renter-account.component';
 import { ClientAccountComponent } from './components/client-account/client-account.component';
-import { ProductComponent } from './components/product/product.component';
+import { ProductComponent } from './components/products/product/product.component';
+import { ProductUpdateComponent } from './components/products/product-update/product-update.component';
+import { ProductAddComponent } from './components/products/product-add/product-add.component';
+import { ProductRentComponent } from './components/products/product-rent/product-rent.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { ProductDetailComponent } from './components/products/product-detail/product-detail.component';
+import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
 
 
 export function tokenGetter() {
@@ -37,7 +43,13 @@ export function tokenGetter() {
     ClientComponent,
     RenterAccountComponent,
     ClientAccountComponent,
-    ProductComponent
+    ProductComponent,
+    ProductUpdateComponent,
+    ProductAddComponent,
+    ProductRentComponent,
+    FilterPipe,
+    ProductDetailComponent,
+    ProductFilterComponent
   ],
   imports: [
     BrowserModule,

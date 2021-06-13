@@ -11,12 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ClientRegisterComponent implements OnInit {
   clientRegisterForm:FormGroup
-
   
-  constructor(private formBuilder:FormBuilder,
+  constructor(
+    private formBuilder:FormBuilder,
     private toastrService:ToastrService,
     private authService:AuthService,
-    private router:Router) { }
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
     this.createClientRegisterForm()
@@ -44,7 +45,7 @@ export class ClientRegisterComponent implements OnInit {
       console.log(this.clientRegisterForm.value);
 
       let clientRegisterModel=Object.assign({},this.clientRegisterForm.value)
-      this.authService.sign_up(clientRegisterModel).subscribe(response=>{
+      this.authService.register(clientRegisterModel).subscribe(response=>{
         this.toastrService.info(response.message)
         this.toastrService.success("Kayıt Başarılı")
         localStorage.setItem("token", response.data.token)

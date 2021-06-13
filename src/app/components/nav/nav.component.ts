@@ -38,35 +38,29 @@ export class NavComponent implements OnInit {
     return false
   }
  }
- checkAdminRole(){
-  /* if(this.authService.role=="admin"){
+ checkClientRole(){
+  if(this.authService.role=="client"){
     return true
   }
   else{
     return false
   } 
-  */
  }
- checkUserRole(){
-  /*
-  if(this.authService.role=="user"){
+ checkRenterRole(){
+  if(this.authService.role=="renter"){
     return true
   }
   else{
     return false
   }
-  */
  }
 
  checkNotRole(){
-  /* if(this.authService.role==null){
+  if(this.authService.role==null){
     return true
   }
   else{
     return false
-  } */
+  }
  }
-
-
-
 }

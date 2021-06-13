@@ -20,4 +20,5 @@ export class ClientService {
     return this.httpClient.get<ListResponseModel<ClientRegisterModel>>(newPath)
   }
 
+
 }

@@ -1,5 +1,7 @@
-export interface Product{
-    renterId:number
+import { Base } from "./base";
+
+export interface Product extends Base{
+    renterId:string
     city:string
     category:string
     brand:string
@@ -10,11 +12,11 @@ export interface Product{
     isOpenToSell:boolean
     isUsed:boolean
     maxRentalDays:number
-    dailyPrice:number
-    fullPrice:number
-    depositPrice:number
+    dailyPrice:Float32Array
+    fullPrice:Float32Array
+    depositPrice:Float32Array
     stockQuantity:number
-    deliveryTypes:string
+    deliveryTypes: string
     imageNames:string
     tags:string
 }

@@ -30,73 +30,32 @@ export class AuthService {
 
   constructor(
     private httpClient:HttpClient,
-    private router:Router,
-    private localStorageService:LocalStorageService,
-    private jwtHelper: JwtHelperService
+    private router:Router
     ) { }
 
-    login(loginModel:LoginModel){
-      return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"login",loginModel)
+    login(user:LoginModel):Observable<SingleResponseModel<TokenModel>>{
+      let newPath=this.baseURL+'login';
+      return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath,user);
     }
   
-    sign_up(data: any){
-      return this.httpClient.post<SingleResponseModel<TokenModel>>(this.baseURL+"sign_up", data)
-    }
-
     isAuthenticated(){
-      if(localStorage.getItem("token")){
-        return true;
-      }
-      else{
-        return false;
-      }
-    }
-
-    clientRegisterDetailFromToken(){
-      this.token = this.localStorageService.getItem("token");
-    }
-
-    renterRegisterDetailFromToken(){
-      this.token = this.localStorageService.getItem("token");
-      let decodedToken = this.jwtHelper.decodeToken(this.token);
-      let name = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-      this.name = name.split(' ')[0];
-      let surname = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-      this.surname = surname.split(' ')[1];
-      this.roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-      this.role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-      
-      this.email=decodedToken["email"];
+      return sessionStorage.getItem("token");
     }
   
-    roleCheck(roleList: string[]) {
-      if (this.roles !== null) {
-        roleList.forEach(role => {
-          if (this.roles.includes(role)) {
-            return true;
-          } else {
-            return false;
-          }
-        })
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    logout(){
-      localStorage.clear();
-      this.onRefresh();
-      this.router.navigateByUrl('/');
-      
+    register(registerModel: RegisterModel): Observable<SingleResponseModel<TokenModel>> {
+      let newPath=this.baseURL+'sign_up';
+      return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath,registerModel);
     }
   
-    async onRefresh() {
-      this.router.routeReuseStrategy.shouldReuseRoute = function () { return false }
-      const currentUrl = this.router.url + '?'
-      return this.router.navigateByUrl(currentUrl).then(() => {
-        this.router.navigated = false
-        this.router.navigate([this.router.url])
-      })
+    logOut(){
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("email");
     }
+
+    getByEmail(email:string):Observable<SingleResponseModel<RegisterModel>>{
+      let newPath = this.baseURL+'getbymail?email='+email;
+      return this.httpClient.get<SingleResponseModel<RegisterModel>>(newPath);
+    }
+    
 }
