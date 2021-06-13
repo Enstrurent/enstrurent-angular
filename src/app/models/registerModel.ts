@@ -1,4 +1,6 @@
-export interface RegisterModel{
+import { Base } from "./base";
+
+export interface RegisterModel extends Base{
     email:string;
     name:string;
     surname:string;
