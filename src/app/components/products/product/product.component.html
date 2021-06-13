@@ -1,0 +1,27 @@
+<div class="row">
+  <div
+    *ngFor="let product of products"
+    class="card"
+    style="width: 20rem; padding: 20px"
+  >
+    <div class="card-body">
+      <h5 class="card-title">{{ product.category }}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <b
+        ><li class="list-group-item">Marka: {{ product.brand }}</li></b
+      >
+      <b
+        ><li class="list-group-item">Model: {{ product.model }}</li></b
+      >
+      <b
+        ><li class="list-group-item">Kiralama Ücreti: {{ product.dailyPrice }}</li></b
+      >
+      <b
+        ><li class="list-group-item">Satış Fiyatı: {{ product.fullPrice }} ₺</li></b
+      >
+    </ul>
+    </div>
+  </div>
+
+
