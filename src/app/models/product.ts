@@ -7,16 +7,16 @@ export interface Product extends Base{
     brand:string
     model:string
     info:string
-    isRental:boolean
-    isDepositRequired:boolean
-    isOpenToSell:boolean
-    isUsed:boolean
-    maxRentalDays:number
-    dailyPrice:Float32Array
-    fullPrice:Float32Array
-    depositPrice:Float32Array
-    stockQuantity:number
-    deliveryTypes: string
-    imageNames:string
+    is_rental:boolean
+    is_deposit_required:boolean
+    is_open_to_sell:boolean
+    is_used:boolean
+    max_rental_days:number
+    daily_price:number
+    full_price:number
+    deposit_price:number
+    stock_quantity:number
+    delivery_types: string
+    image_names:string
     tags:string
 }
