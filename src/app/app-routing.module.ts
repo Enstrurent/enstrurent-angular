@@ -7,6 +7,8 @@ import { LoginGuard } from './guards/login.guard';
 import { RenterRegisterComponent } from './components/renter-register/renter-register.component';
 import { ProductComponent } from './components/products/product/product.component';
 import { ProductAddComponent } from './components/products/product-add/product-add.component';
+import { ProductDetailComponent } from "./components/products/product-detail/product-detail.component";
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -15,6 +17,8 @@ const routes: Routes = [
   {path:"renter-register", component:RenterRegisterComponent},
   {path:"product", component:ProductComponent},
   {path:"product-add", component:ProductAddComponent},
+  {path:"products/detail/:id", component: ProductDetailComponent},
+  {path:"about", component:AboutComponent}
 ];
 
 @NgModule({
