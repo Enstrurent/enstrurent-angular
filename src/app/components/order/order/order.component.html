@@ -1,0 +1,49 @@
+<div class="container-fluid col-md-12" style="text-align: center; background-color: #25222a; marker-mid: initial">
+  <div class="row">
+    <h4 style="color: white">
+      Geçmiş Siparişlerim
+      <hr style="color: #d9b54a" />
+    </h4>
+    <div *ngFor="let order of orders" class="card p-3 my-3" style="
+          width: 90rem;
+          height: 25rem;
+          padding: 15px;
+          margin: 15px;
+          text-align: center;
+          background-color: #25222a;
+          border: currentColor;
+          background-image: var(--bs-gradient);
+          border-radius: 1rem;
+        ">
+ <h5 style="color: white;">Tarih : 01.06.2021
+          <hr style="color: #d9b54a" />
+        </h5>
+      
+      <div class="row">
+        <div class="col-md-3" style="text-align: start;">
+          <div class="image">
+            <img class="img" src="../assets/gitar.jpeg" style="width: 200px; height: 230px" alt="banner2" />
+          </div>
+        </div>
+        <div class="col-md-9 p-3" style="text-align: start;">
+          <div style="color: white;">
+            <p>Ödeme Yöntemi : {{order.payment_method}}</p>
+          </div>
+          <div style="color: white;">
+            <p>Teslimat Türü : {{order.delivery_type}}</p>
+          </div>
+          <div style="color: white;">
+            <p>Ödenen Tutar : {{order.price}} {{order.renting_price}} ₺</p>
+          </div>
+          <div style="color: white;">
+            <p>Depozito Ücreti(varsa) : {{order.deposit_price}}  ₺</p>
+          </div>
+          <div style="color: white;">
+            <p>Sipariş Durumu : {{order.order_status}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
