@@ -1,0 +1,48 @@
+<div class="container-fluid col-md-12" style="text-align: center; background-color: #25222a; marker-mid: initial">
+  <div class="row">
+    <div class="card p-3 my-3" style="
+          width: 90rem;
+          height: 35rem;
+          padding: 15px;
+          margin: 15px;
+          text-align: center;
+          background-color: #25222a;
+          border: currentColor;
+          background-image: var(--bs-gradient);
+          border-radius: 1rem;
+        ">
+        <h4 style="color: white">
+          ÜRÜN DETAYI
+          <hr style="color: #d9b54a" />
+        </h4>
+        <div class="row">
+          <div *ngIf="productDetail" class="list-group list-group-flush col" style="padding: 10px;">
+            <div style="color: white; text-align: start;"><h5> {{productDetail.brand}} {{productDetail.category}}</h5>             <hr style="color: #d9b54a; width: 500px;">
+            </div> 
+            
+            <div style="color: white; text-align: start;"><li> {{productDetail.model}} Model</li> </div> 
+            <div style="color: white; text-align: start;"><li>Günlük Kiralama Ücreti : {{productDetail.daily_price}} ₺</li> </div> 
+            <div style="color: white; text-align: start;"><li>Satış Fiyatı : {{productDetail.full_price}} ₺</li> </div> 
+            <div style="color: white; text-align: start;"><li>Depozito Ücreti : {{productDetail.deposit_price}} ₺</li> </div> 
+            <div style="color: white; text-align: start;"><li>Stok Bilgisi : {{productDetail.stock_quantity}} </li> </div> 
+            <div style="color: white; text-align: start;"><li>Maksimum Kiralama Günü : {{productDetail.max_rental_days}} gün</li> </div> 
+            <div style="color: white; text-align: start;"><li>Etiketler : {{productDetail.tags}} </li> </div> 
+
+
+            <br>
+            <div style="color: white; text-align: start;"><h6><i> {{productDetail.info}}</i></h6>             
+            </div> 
+            <div class="btn btn">
+              <a href="#" class="nav-link text-white" style="width: 95px;
+              height: 40px; background-color: #d9b54a; border-radius: 14px;">
+                KİRALA
+              </a>
+            </div>
+          </div>
+          <div class="image col">
+            <img class="img" src="../assets/gitar.jpeg" style="width: 200px; height: 230px" alt="banner2" />
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
