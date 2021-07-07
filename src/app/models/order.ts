@@ -1,5 +1,6 @@
 import { Time } from "@angular/common";
 import { Base } from "./base";
+import { DateRange } from "./dateRange";
 
 export interface OrderBase extends Base{
 	address_id:number
@@ -15,5 +16,5 @@ export interface OrderBase extends Base{
 	number_of_days_for_rent:number      
 	deposit_price:number
 	renting_price:number
-	rented_days_range:string[][]
+	rented_date_range:DateRange
 }
