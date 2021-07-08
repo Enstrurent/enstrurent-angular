@@ -9,6 +9,13 @@ import { ProductComponent } from './components/products/product/product.componen
 import { ProductAddComponent } from './components/products/product-add/product-add.component';
 import { ProductDetailComponent } from "./components/products/product-detail/product-detail.component";
 import { AboutComponent } from './components/about/about.component';
+import { OrderComponent } from './components/order/order/order.component';
+import { ClientAccountComponent } from './components/client-account/client-account.component';
+import { RentOrderComponent } from './components/order/rent-order/rent-order.component';
+import { PurchaseOrderComponent } from './components/order/purchase-order/purchase-order.component';
+import { AddressComponent } from './components/address/address.component';
+import { AddressAddComponent } from './components/address/address-add/address-add.component';
+
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -17,8 +24,18 @@ const routes: Routes = [
   {path:"renter-register", component:RenterRegisterComponent},
   {path:"product", component:ProductComponent},
   {path:"product-add", component:ProductAddComponent},
-  {path:"products/detail/:id", component: ProductDetailComponent},
-  {path:"about", component:AboutComponent}
+  {path:"product-detail/:id", component: ProductDetailComponent},
+  {path:"about", component:AboutComponent},
+  {path:"orders", component:OrderComponent},
+  {path:"loginGuard", component:LoginGuard},
+  {path:"client-account", component:ClientAccountComponent},
+  {path:"rent-order", component:RentOrderComponent},
+  {path:"purchase-order", component:PurchaseOrderComponent},
+  {path:"addresses/:id", component:AddressComponent},
+  {path:"addresses", component:AddressAddComponent}
+
+
+
 ];
 
 @NgModule({

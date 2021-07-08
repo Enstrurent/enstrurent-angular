@@ -20,12 +20,17 @@ import { ClientComponent } from './components/client/client.component';
 import { RenterAccountComponent } from './components/renter-account/renter-account.component';
 import { ClientAccountComponent } from './components/client-account/client-account.component';
 import { ProductComponent } from './components/products/product/product.component';
-import { ProductUpdateComponent } from './components/products/product-update/product-update.component';
 import { ProductAddComponent } from './components/products/product-add/product-add.component';
-import { ProductRentComponent } from './components/products/product-rent/product-rent.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ProductDetailComponent } from './components/products/product-detail/product-detail.component';
-import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
+import { ImageComponent } from './components/images/image/image.component';
+import { ImageAddComponent } from './components/images/image-add/image-add.component';
+import { AboutComponent } from './components/about/about.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { OrderComponent } from './components/order/order/order.component';
+import { PurchaseOrderComponent } from './components/order/purchase-order/purchase-order.component';
+import { RentOrderComponent } from './components/order/rent-order/rent-order.component';
+import { AddressAddComponent } from './components/address/address-add/address-add.component';
 
 
 export function tokenGetter() {
@@ -44,12 +49,17 @@ export function tokenGetter() {
     RenterAccountComponent,
     ClientAccountComponent,
     ProductComponent,
-    ProductUpdateComponent,
     ProductAddComponent,
-    ProductRentComponent,
     FilterPipe,
     ProductDetailComponent,
-    ProductFilterComponent
+    ImageComponent,
+    ImageAddComponent,
+    AboutComponent,
+    FooterComponent,
+    OrderComponent,
+    PurchaseOrderComponent,
+    RentOrderComponent,
+    AddressAddComponent
   ],
   imports: [
     BrowserModule,

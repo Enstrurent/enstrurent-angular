@@ -1,12 +1,14 @@
 <div class="container col-md-12">
   <app-nav></app-nav>
   <div class="row">
-    <div class="col-md-3">
+    <div class="container col-md-3 p-0 my-0">
       <app-login></app-login>
     </div>
-    <div class="container-fluid col-md-9 p-2 my-2" style="background-color: grey; border-radius: 14px;">
-      <app-product></app-product>
-      <app-product-add></app-product-add>
+    <div class="container col-md-9 p-0 my-3" >
+      <ap-order></ap-order>
+      <router-outlet></router-outlet>
     </div>
-  <router-outlet></router-outlet>
+    <div>
+  <app-footer></app-footer>
+</div>
 </div>
