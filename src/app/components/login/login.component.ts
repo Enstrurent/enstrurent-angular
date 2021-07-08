@@ -21,13 +21,11 @@ import { ClientRegisterComponent } from '../clientRegister/clientRegister.compon
 export class LoginComponent implements OnInit {
 
   loginForm : FormGroup
-  registerModel:RegisterModel
+  
   constructor(
     private formBuilder:FormBuilder,
     private authService:AuthService,
-    private router:Router,
-    private toastrService:ToastrService,
-    private clientService:ClientService
+    private toastrService:ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -43,32 +41,15 @@ export class LoginComponent implements OnInit {
 
   login(){
     if(this.loginForm.valid){
-
-      let loginModel:LoginModel = Object.assign({},this.loginForm.value)
-
+      console.log(this.loginForm.value);
+      let loginModel = Object.assign({},this.loginForm.value)
       this.authService.login(loginModel).subscribe(response=>{
-        console.log(response);
-        this.toastrService.success("Giriş başarılı")
-        sessionStorage.setItem("token", response.data.token);
-        
-        //this.toastrService.info(response.message)
-        //this.router.navigate(['/'])
-        this.getUser(loginModel.email);
+        this.toastrService.info("Giriş başarılı")
+        localStorage.setItem("token",(response as any).token)
       },responseError=>{
-        console.log(responseError)
         this.toastrService.error(responseError.error)
       })
-    }else{
-      this.toastrService.warning("ERROR");
     }
   }
 
-  getUser(email:string){
-      this.authService.getByEmail(email).subscribe((response) => {
-        this.registerModel = response.data;
-        console.info(this.registerModel)
-        sessionStorage.setItem("fullName", this.registerModel.name + " " + this.registerModel.surname);
-        sessionStorage.setItem("email",this.registerModel.email)
-      });
-  }
 }
